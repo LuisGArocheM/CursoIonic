@@ -1,7 +1,10 @@
 {
   "name": "fotosgram",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {
+      "enabled": false
+    }
   },
   "type": "angular"
 }
