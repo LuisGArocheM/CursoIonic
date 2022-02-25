@@ -6,6 +6,10 @@
     <param name="android-package" value="org.apache.cordova.camera.CameraLauncher"/>
   </feature>
 
+  <feature name="CordovaPluginsCleartext">
+    <param name="android-package" value="cordova.plugins.cleartext"/>
+  </feature>
+
   <feature name="File">
     <param name="android-package" value="org.apache.cordova.file.FileUtils"/>
     <param name="onload" value="true"/>

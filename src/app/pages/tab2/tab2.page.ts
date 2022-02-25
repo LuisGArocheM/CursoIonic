@@ -74,12 +74,16 @@ export class Tab2Page {
 
   camara(){
     const options: CameraOptions = {
-      quality: 60,
+       quality: 100,
+      // destinationType: this.camera.DestinationType.FILE_URI,
+      // encodingType: this.camera.EncodingType.JPEG,
+      // mediaType: this.camera.MediaType.PICTURE,
+      // correctOrientation:true,
+      // sourceType: this.camera.PictureSourceType.CAMERA
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation:true,
-      sourceType: this.camera.PictureSourceType.CAMERA
+        mediaType: this.camera.MediaType.PICTURE,
+        sourceType: this.camera.PictureSourceType.CAMERA
     };
     
     this.procesarImagen(options);
@@ -89,7 +93,7 @@ export class Tab2Page {
 
   libreria(){
     const options: CameraOptions = {
-      quality: 60,
+      quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -97,16 +101,25 @@ export class Tab2Page {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     };
 
+    this.procesarImagen(options);
+
   }
 
   procesarImagen(options:CameraOptions){
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-        const img = window.Ionic.WebView.convertFile(imageData);
+        const img = window.Ionic.WebView.convertFileSrc(imageData);
         console.log(img);
- 
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+
+
+         this.posts.subirImagen(imageData);
         this.tempImages.push(imageData);
+
+        this.posts.subirImagen(base64Image);
+        this.tempImages.push(base64Image);
+
         
      }, (err) => {
       // Handle error
