@@ -4,6 +4,7 @@ import { PostsService } from 'src/app/services/posts.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
+
 declare var window:any;
 @Component({
   selector: 'app-tab2',
@@ -94,7 +95,7 @@ export class Tab2Page {
   libreria(){
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation:true,
@@ -109,20 +110,23 @@ export class Tab2Page {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
+        
         const img = window.Ionic.WebView.convertFileSrc(imageData);
+         
         console.log(img);
         let base64Image = 'data:image/jpeg;base64,' + imageData;
 
 
-         this.posts.subirImagen(imageData);
+        this.posts.subirImagen(imageData);
         this.tempImages.push(imageData);
 
-        this.posts.subirImagen(base64Image);
+        this.posts.subirImagen(img);
         this.tempImages.push(base64Image);
 
         
      }, (err) => {
-      // Handle error
+         //console.log(err);
+         
      });
   }
 
