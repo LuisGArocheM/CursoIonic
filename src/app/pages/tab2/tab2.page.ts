@@ -113,20 +113,19 @@ export class Tab2Page {
         
         const img = window.Ionic.WebView.convertFileSrc(imageData);
          
-        console.log(img);
+        // console.log(img);
         let base64Image = 'data:image/jpeg;base64,' + imageData;
 
 
-        this.posts.subirImagen(imageData);
-        this.tempImages.push(imageData);
+        //  this.posts.subirImagen(imageData);
+        // this.tempImages.push(imageData);
 
-        this.posts.subirImagen(img);
+        this.posts.subirImagen(base64Image);
         this.tempImages.push(base64Image);
 
         
      }, (err) => {
-         //console.log(err);
-         
+      // Handle error
      });
   }
 
